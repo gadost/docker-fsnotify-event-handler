@@ -1,2 +1,4 @@
-```export WATCH_PATH=
-```export EVENT_MARKER=
+```bash
+export WATCH_PATH=
+export EVENT_MARKER=
+```
