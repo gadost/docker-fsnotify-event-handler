@@ -1,3 +1,6 @@
+## overview
+docker-fsnotify-event-handler developed for processing some filesystem events like letsencrypt cert renew for one domain on multiply hosts ( f.e. on my case - N nginx instances on different hosts using same certs. On certs renew le companion reloading only one nginx, other all proceed using old certs.).
+
 ## Install
 
 ```bash
@@ -23,7 +26,7 @@ AgentName  string  `env:"HOSTNAME"`
 docker run -it --privileged --network=host -v /var/run/docker.sock:/var/run/docker.sock -v /root/gotest:/dir -e WATCH_PATH=/dir -e "REDIS_ADDR=somehost:6379" maxn/docker-fsnotify-event-handler:v1
 ```
 
-# build
+## build
 ```bash
 docker build .
 ```
