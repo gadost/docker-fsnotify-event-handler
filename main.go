@@ -6,7 +6,12 @@ import (
     "log"
     "os"
     "path/filepath"
+    "github.com/gadost/docker-fsnotify-event-handler/sqs"
+    "github.com/go-redis/redis"
+    "time"
 )
+
+var c = sqs.MarshalConfig()
 
 func main() {
     //define watcher
@@ -15,9 +20,12 @@ func main() {
         log.Fatal(err)
     }
     defer watcher.Close()
-    //Add watcher start dir
+
+    client := sqs.Client(c)
+    sqs.RegisterAgent(c.AgentsSet, c.AgentName, client)
     go Walking(watcher)
-    CheckEvent(watcher)
+    go QueueProcessor(client)
+    CheckEvent(watcher, client,c)
 }
 
 func Walking(watcher *fsnotify.Watcher) {
@@ -27,7 +35,7 @@ func Walking(watcher *fsnotify.Watcher) {
     })
 }
 
-func CheckEvent(watcher *fsnotify.Watcher) {
+func CheckEvent(watcher *fsnotify.Watcher, client *redis.Client,c sqs.Config) {
     done := make(chan bool)
     go func() {
         for {
@@ -40,12 +48,7 @@ func CheckEvent(watcher *fsnotify.Watcher) {
                 }
                 log.Println("event:", event)
                 if  string(event.Op.String()) == "RENAME" || string(event.Op.String()) == "CHMOD" || string(event.Op.String()) == "CREATE" {
-                    e, err := os.Create(os.Getenv("EVENT_MARKER"))
-                    if err != nil {
-                        log.Fatal(err)
-                    }
-                    log.Println(e)
-                    e.Close()
+                    sqs.AddToQueue(c.AgentName, "wait", client)
                 }
             case err := <-watcher.Errors:
                 log.Println("error:", err)
@@ -53,4 +56,11 @@ func CheckEvent(watcher *fsnotify.Watcher) {
         }
     }()
     <-done
+}
+
+func QueueProcessor(client *redis.Client) {
+  for {
+    <-time.After(20 * time.Second)
+    go sqs.CheckQueue(c.AgentName, "wait", client)
+  }
 }
