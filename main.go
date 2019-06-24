@@ -47,7 +47,7 @@ func CheckEvent(watcher *fsnotify.Watcher, client *redis.Client,c sqs.Config) {
                     break
                 }
                 if  AllowedEvents(event.Op.String()) {
-                    log.Println("event: ", event.Op.String())
+                    log.Println("event:", event)
                     sqs.AddToQueue(c.AgentName, "wait", client)
                 }
             case err := <-watcher.Errors:
