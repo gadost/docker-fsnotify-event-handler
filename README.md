@@ -1,3 +1,5 @@
+## Install
+
 ```bash
 go get github.com/gadost/docker-fsnotify-event-handler
 cd $GOPATH/src/github.com/gadost/docker-fsnotify-event-handler
@@ -18,11 +20,5 @@ AgentName  string  `env:"HOSTNAME"`
 ## Docker example
 
 ```bash
-docker run -it --privileged \n
- --network=host \n
- -v /var/run/docker.sock:/var/run/docker.sock \n
- -v /root/gotest:/dir \n
- -e WATCH_PATH=/dir \n
- -e "REDIS_ADDR=somehost:6379" \n
- maxn/docker-fsnotify-event-handler:v1
+docker run -it --privileged --network=host -v /var/run/docker.sock:/var/run/docker.sock \n-v /root/gotest:/dir -e WATCH_PATH=/dir -e "REDIS_ADDR=somehost:6379" maxn/docker-fsnotify-event-handler:v1
 ```
