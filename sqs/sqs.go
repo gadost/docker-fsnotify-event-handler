@@ -9,9 +9,9 @@ import (
 
 
 type Config struct {
-	redisAddr  string  `env:"REDIS_ADDR" envDefault:"localhost:6379"`
-	redisPass  string  `env:"REDIS_PASS" envDefault:""`
-	redisDB    int     `env:"REDIS_DB" envDefault:"0"`
+    redisAddr  string  `env:"REDIS_ADDR" envDefault:"localhost:6379"`
+    redisPass  string  `env:"REDIS_PASS" envDefault:""`
+    redisDB    int     `env:"REDIS_DB" envDefault:"0"`
     AgentsSet  string  `env:"AGENTS_SET_NAME" envDefault:"agents"`
     QueueName  string  `env:"QUEUE_NAME" envDefault:"lecc"`
     AgentName  string  `env:"HOSTNAME"`
