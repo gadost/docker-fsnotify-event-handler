@@ -5,9 +5,9 @@ go build .
 export WATCH_PATH=/path/to/watch ; ./docker-fsnotify-event-handler
 
 ```
-#env variables
+# env variables
 
-##Struct
+## Struct
 ```golang
 RedisAddr  string  `env:"REDIS_ADDR" envDefault:"localhost:6379"`
 RedisPass  string  `env:"REDIS_PASS" envDefault:""`
