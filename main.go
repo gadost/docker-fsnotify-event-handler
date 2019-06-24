@@ -46,8 +46,7 @@ func CheckEvent(watcher *fsnotify.Watcher, client *redis.Client,c sqs.Config) {
                     watcher.Add(event.Name)
                     break
                 }
-                log.Println("event:", event)
-                if  string(event.Op.String()) == "RENAME" || string(event.Op.String()) == "CHMOD" || string(event.Op.String()) == "CREATE" {
+                if  AllowedEvents(event.Op.String()) {
                     sqs.AddToQueue(c.AgentName, "wait", client)
                 }
             case err := <-watcher.Errors:
@@ -63,4 +62,16 @@ func QueueProcessor(client *redis.Client) {
     <-time.After(20 * time.Second)
     go sqs.CheckQueue(c.AgentName, "wait", client)
   }
+}
+
+func AllowedEvents(e string) bool {
+    switch e {
+    case
+    "RENAME",
+    "CHMOD",
+    "CREATE",
+    "WRITE":
+    return true
+    }
+    return false
 }
