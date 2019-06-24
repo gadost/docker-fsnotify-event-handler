@@ -9,9 +9,9 @@ import (
 
 
 type Config struct {
-    redisAddr  string  `env:"REDIS_ADDR" envDefault:"localhost:6379"`
-    redisPass  string  `env:"REDIS_PASS" envDefault:""`
-    redisDB    int     `env:"REDIS_DB" envDefault:"0"`
+    RedisAddr  string  `env:"REDIS_ADDR" envDefault:"localhost:6379"`
+    RedisPass  string  `env:"REDIS_PASS" envDefault:""`
+    RedisDB    int     `env:"REDIS_DB" envDefault:"0"`
     AgentsSet  string  `env:"AGENTS_SET_NAME" envDefault:"agents"`
     QueueName  string  `env:"QUEUE_NAME" envDefault:"lecc"`
     AgentName  string  `env:"HOSTNAME"`
@@ -23,9 +23,9 @@ func init(){}
 // Define Client Redis from config
 func Client(c Config) *redis.Client {
     client = redis.NewClient(&redis.Options{
-        Addr:     c.redisAddr,
-        Password: c.redisPass,
-        DB:       c.redisDB,
+        Addr:     c.RedisAddr,
+        Password: c.RedisPass,
+        DB:       c.RedisDB,
     })
     _, err := client.Ping().Result()
     if err != nil {
