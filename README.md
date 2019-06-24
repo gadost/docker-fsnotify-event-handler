@@ -20,5 +20,10 @@ AgentName  string  `env:"HOSTNAME"`
 ## Docker example
 
 ```bash
-docker run -it --privileged --network=host -v /var/run/docker.sock:/var/run/docker.sock \n-v /root/gotest:/dir -e WATCH_PATH=/dir -e "REDIS_ADDR=somehost:6379" maxn/docker-fsnotify-event-handler:v1
+docker run -it --privileged --network=host -v /var/run/docker.sock:/var/run/docker.sock -v /root/gotest:/dir -e WATCH_PATH=/dir -e "REDIS_ADDR=somehost:6379" maxn/docker-fsnotify-event-handler:v1
+```
+
+# build
+```bash
+docker build .
 ```
