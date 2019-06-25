@@ -8,7 +8,7 @@ import (
 )
 
 func Handler() {
-    cli, err := client.NewEnvClient()
+    cli, err := client.NewClientWithOpts(client.FromEnv)
     if err != nil {
         panic(err)
     }
@@ -24,9 +24,10 @@ func Handler() {
             config := types.ExecConfig{AttachStdout: true, AttachStderr: true,
                 Cmd: []string{"nginx", "-s", "reload"}}
             res, _ := cli.ContainerExecCreate(context.Background(), container.ID, config)
+            log.Println("restarting: ", container.ID, " by event: ", res.ID)
             err := cli.ContainerExecStart(context.Background(), res.ID, types.ExecStartCheck{Detach:true,Tty:true})
             if err!= nil {
-                panic(err)
+                log.Print(err)
             }
         }
     }

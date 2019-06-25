@@ -15,6 +15,7 @@ type Config struct {
     AgentsSet  string  `env:"AGENTS_SET_NAME" envDefault:"agents"`
     QueueName  string  `env:"QUEUE_NAME" envDefault:"lecc"`
     AgentName  string  `env:"HOSTNAME"`
+    Interval   int     `env:"INERVAL" envDefault:"20"`
 }
 
 var client *redis.Client

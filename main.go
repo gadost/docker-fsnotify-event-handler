@@ -41,7 +41,10 @@ func CheckEvent(watcher *fsnotify.Watcher, client *redis.Client,c sqs.Config) {
         for {
             select {
             case event := <-watcher.Events:
-                fi,_ := os.Stat(event.Name)
+                fi,err := os.Stat(event.Name)
+                if err != nil {
+                    break
+                }
                 if fi.Mode().IsDir() {
                     watcher.Add(event.Name)
                     break
@@ -60,7 +63,7 @@ func CheckEvent(watcher *fsnotify.Watcher, client *redis.Client,c sqs.Config) {
 
 func QueueProcessor(client *redis.Client) {
   for {
-    <-time.After(20 * time.Second)
+    <-time.After(time.Duration(c.Interval) * time.Second)
     go sqs.CheckQueue(c.AgentName, "wait", client)
   }
 }
