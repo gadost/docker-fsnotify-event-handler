@@ -1,0 +1,15 @@
+version: '2'
+services:
+  docker-fsnotify-event-handler:
+    image: maxn/docker-fsnotify-event-handler:latest
+    depends_on: ["redis"]
+    volumes:
+    - /path/to/certs:/somedir
+    - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+    - WATCH_PATH=/somedir
+    - REDIS_ADDR=redis:6379
+    network_mode: host
+    privileged: true
+  redis:
+    image: redis:alpine
