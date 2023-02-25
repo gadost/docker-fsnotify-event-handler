@@ -4,8 +4,8 @@ go 1.18
 
 require (
 	github.com/caarlos0/env v3.5.0+incompatible
-	github.com/docker/docker v20.10.17+incompatible
-	github.com/fsnotify/fsnotify v1.6.0
+	github.com/docker/docker v23.0.1+incompatible
+	github.com/fsnotify/fsnotify v1.5.4
 	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/spf13/cobra v1.6.1
 	golang.org/x/net v0.0.0-20220615171555-694bf12d69de
@@ -25,7 +25,6 @@ require (
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.0.2 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
-	github.com/sirupsen/logrus v1.8.1 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/stretchr/testify v1.7.2 // indirect
 	golang.org/x/sys v0.0.0-20220908164124-27713097b956 // indirect
