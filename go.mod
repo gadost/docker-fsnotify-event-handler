@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/caarlos0/env v3.5.0+incompatible
-	github.com/docker/docker v23.0.2+incompatible
+	github.com/docker/docker v24.0.2+incompatible
 	github.com/fsnotify/fsnotify v1.6.0
 	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/spf13/cobra v1.6.1
