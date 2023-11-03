@@ -4,6 +4,7 @@
 *.dll
 *.so
 *.dylib
+docker-fsnotify-event-handler
 
 # Test binary, build with `go test -c`
 *.test
