@@ -1,6 +1,6 @@
 module github.com/gadost/docker-fsnotify-event-handler
 
-go 1.18
+go 1.21.1
 
 require (
 	github.com/caarlos0/env v3.5.0+incompatible
