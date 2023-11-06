@@ -5,7 +5,7 @@ go 1.21.1
 require (
 	github.com/caarlos0/env v3.5.0+incompatible
 	github.com/docker/docker v24.0.7+incompatible
-	github.com/fsnotify/fsnotify v1.6.0
+	github.com/fsnotify/fsnotify v1.7.0
 	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/spf13/cobra v1.7.0
 	golang.org/x/net v0.17.0
